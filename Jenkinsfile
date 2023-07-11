@@ -157,9 +157,6 @@ pipeline {
 
                         // Template
                         sh "helm template mariadb bitnami/mariadb-galera -f mariadb-values.yaml ${MARIADB_OPTIONS.trim()} --namespace mariadb > mariadb-template.yaml"
-
-                        // Print Yaml
-                        sh "cat mariadb-template.yaml"
         
                     }
 
@@ -171,6 +168,9 @@ pipeline {
   
                         // Kustomize
                         sh "kustomize build > mariadb-template.yaml"
+
+                        // Print Yaml
+                        sh "cat mariadb-template.yaml"
   
                     }
   
