@@ -228,6 +228,7 @@ pipeline {
 
                         sh "kubectl rollout restart deployment -n mariadb"
                         sh "kubectl rollout restart daemonset -n mariadb"
+                        sh "kubectl rollout restart statefulset -n mariadb"
 
                     }
 
