@@ -23,6 +23,10 @@ pipeline {
 
     parameters {
         choice(description: "Action", name: "Action", choices: ["Plan", "Apply", "Destroy"])
+        string(description: "Root User name", name: "ROOT_USERNAME", defaultValue: env.ROOT_USERNAME ? env.ROOT_USERNAME : '')
+        string(description: "Root User password", name: "ROOT_USERPASSWORD", defaultValue: env.ROOT_USERPASSWORD ? env.ROOT_USERPASSWORD : '')
+        string(description: "Extra User name", name: "EXTRA_USERNAME", defaultValue: env.EXTRA_USERNAME ? env.EXTRA_USERNAME : '')
+        string(description: "Extra User password", name: "EXTRA_USERPASSWORD", defaultValue: env.EXTRA_USERPASSWORD ? env.EXTRA_USERPASSWORD : '')
         booleanParam(description: "Debug", name: "DEBUG", defaultValue: env.DEBUG ? env.DEBUG : "false")
     }
 
@@ -142,6 +146,14 @@ pipeline {
 
                             // Enable debug
                             MARIADB_OPTIONS += "--debug "
+
+                        }
+
+                        // If Root user is provided
+                        if (env.ROOT_USERNAME && env.ROOT_USERPASSWORD) {
+
+                            // Provide root user name and password
+                            MARIADB_OPTIONS += "--set rootUser.user=${env.ROOT_USERNAME},rootUser.password=${env.ROOT_USERPASSWORD} "
 
                         }
 
