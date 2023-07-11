@@ -90,7 +90,7 @@ pipeline {
                     script {
     
                         // Install repo
-                        sh "helm repo add bitnami oci://registry-1.docker.io/bitnamicharts"
+                        sh "helm repo add bitnami https://charts.bitnami.com/bitnami"
                         sh "helm repo update"
     
                     }
