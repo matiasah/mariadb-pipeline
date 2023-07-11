@@ -60,13 +60,6 @@ pipeline {
                     name: "kubectl"
                     resources: {}
                     tty: true
-                  - command:
-                    - "cat"
-                    image: "k8s.gcr.io/kustomize/kustomize:v5.0.1"
-                    imagePullPolicy: "IfNotPresent"
-                    name: "kustomize"
-                    resources: {}
-                    tty: true
                   serviceAccountName: jenkins-slave
                   volumes:
                   - emptyDir:
