@@ -165,6 +165,9 @@ pipeline {
                 container ("kustomize") {
   
                     script {
+
+                        // Print Yaml
+                        sh "cat mariadb-template.yaml"
   
                         // Kustomize
                         sh "kustomize build > mariadb-template.yaml"
