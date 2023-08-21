@@ -25,6 +25,9 @@ pipeline {
         choice(description: "Action", name: "Action", choices: ["Plan", "Apply", "Destroy"])
         string(description: "Root User name", name: "ROOT_USERNAME", defaultValue: env.ROOT_USERNAME ? env.ROOT_USERNAME : '')
         string(description: "Root User password", name: "ROOT_USERPASSWORD", defaultValue: env.ROOT_USERPASSWORD ? env.ROOT_USERPASSWORD : '')
+        string(description: "User name", name: "USERNAME", defaultValue: env.USERNAME ? env.USERNAME : '')
+        string(description: "User password", name: "USERPASSWORD", defaultValue: env.USERPASSWORD ? env.USERPASSWORD : '')
+        string(description: "Database", name: "DATABASE", defaultValue: env.DATABASE ? env.DATABASE : '')
         booleanParam(description: "Debug", name: "DEBUG", defaultValue: env.DEBUG ? env.DEBUG : "false")
     }
 
@@ -145,6 +148,22 @@ pipeline {
 
                             // Provide root user name and password
                             MARIADB_OPTIONS += "--set rootUser.user=${env.ROOT_USERNAME},rootUser.password=${env.ROOT_USERPASSWORD} "
+
+                        }
+
+                        // If user is provided
+                        if (env.USERNAME && env.USERPASSWORD) {
+
+                            // Provide root user name and password
+                            MARIADB_OPTIONS += "--set db.user=${env.USERNAME},db.password=${env.USERPASSWORD} "
+
+                        }
+
+                        // If database is provided
+                        if (env.DATABASE) {
+
+                            // Provide database
+                            MARIADB_OPTIONS += "--set db.name=${env.DATABASE} "
 
                         }
 
