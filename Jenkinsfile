@@ -132,8 +132,6 @@ pipeline {
 
                     script {
 
-                        sh "envsubst'
-
                         // Cluster agent options
                         MARIADB_OPTIONS = " "
 
